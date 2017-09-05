@@ -11,11 +11,19 @@
     <label for="spacing">Spacing:</label>
     <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
 <!-- data-sizing is a custom data attribute data-* -->
+
     <label for="blur">Blur:</label>
     <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
 
+    <label for="sepia">Sepia:</label>
+    <input id="sepia" type="range" name="sepia" min="0" max="60" value="10" data-sizing="%">
+
     <label for="base">Base Color</label>
     <input id="base" type="color" name="base" value="#ffc600">
+
+    <label for="invert">Invert:</label>
+    <input id="invert" type="range" name="invert" min="0" max="200" value="10" data-sizing="%">
+
   </div>
 
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
@@ -24,13 +32,17 @@
     :root {
       --base: #ffc688;
       --spacing: 10px;
-      --blur: 10px;
+      --blur: 0px;
+      --sepia: 0%;
+      --invert: 0%;
     }
 
     img {
       padding: var(--spacing);
       background: var(--base);
       filter: blur(var(--blur));
+      filter: sepia(var(--sepia));
+      filter: invert(var(--invert));
     }
 
     .hl {
@@ -66,9 +78,8 @@
 
       const suffix = this.dataset.sizing || '';
       document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
-
+      console.log(this.name)
       //this.name = the input clicked on, this.value = value the input's changing, suffix = the data symbol
-
     }
 
     inputs.forEach(input => input.addEventListener('change', handleUpdate));
