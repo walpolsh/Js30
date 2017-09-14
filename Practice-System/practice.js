@@ -30,9 +30,27 @@ const sixteenths = () => {
   + ' to ' + intervals.random() + ', ' + direction.random() + ' to ' + intervals.random();
 };
 
-const postSixteenths = function () {
+const postSixteenths = function (x) {
   var node = document.createElement('LI');
   var textnode = document.createTextNode(sixteenths());
   node.appendChild(textnode);
   document.getElementById('sixteenths').appendChild(node);
+};
+
+const post10Triplets = function (x) {
+  for (var i = 0; i <= x; i++) {
+    var node = document.createElement('LI');
+    var textnode = document.createTextNode(triplets());
+    node.appendChild(textnode);
+    document.getElementById('10triplets').appendChild(node);
+  }
+};
+
+const post10Sixteenths = function (x) {
+  for (var i = 0; i <= x; i++) {
+    var node = document.createElement('LI');
+    var textnode = document.createTextNode(triplets());
+    node.appendChild(textnode);
+    document.getElementById('10sixteenths').appendChild(node);
+  }
 };
