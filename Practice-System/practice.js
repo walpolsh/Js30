@@ -36,7 +36,7 @@ const intervalCombinations = (x) => {
   for (let i = 0; i < x.length - 1; i++) {
     // This is where you'll capture that last value
     for (let j = i + 1; j < x.length; j++) {
-      results.push(`${x[i]} to ${x[j]} \n ${x[j]} to ${x[i]} \n `);
+      results.push(`${x[j]} to ${x[i]} \n ${x[i]} to ${x[j]} \n `);
     }
   };
 
