@@ -14,6 +14,8 @@
     <div id='progressbar'></div>
     <div id='buttons'>
       <button id='start' onclick='countdownTimer()'>Start</button>
+      <button id='pause' onclick='pauseTimer()'>Pause</button>
+
       <button id='reset' onclick='resetTimer()'>reset</button>
     </div>
     <div id='completion'></div>
@@ -36,6 +38,7 @@
   var timer = document.getElementById('timer');
   var completion = document.getElementById('completion');
   var seconds = 1500;
+  var id;
 
   function secondPassed() {
     var minutes = Math.floor(seconds / 60);//amount of seconds / 60
@@ -59,6 +62,8 @@
   };
 
   var countdownTimer = function () { setInterval('secondPassed()', 1000);};
+
+  var pauseTimer = function () {value = timer.textContent; clearTimeout(id);}
 
   var resetTimer = function () {seconds = 1500;};
 

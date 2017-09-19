@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'>
+    <script src='https://code.jquery.com/jquery-3.2.1.js'></script>
+    <script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
+    <title>Pomodoro Timer</title>
+  </head>
+  <body>
+    <div class="container">
+      <div id='message'> Click to start your Pomodoro! </div>
+      <button onClick = "startTimer()">Start</button>
+      <button onClick = "timer.pause()">Pause</button>
+      <button onClick = "timer.resume()">Resume</button>
+
+
+    </div>
+
+    <p id = "timer">00:00</p>
+
+    <div id='progressbar'></div>
+    <div id='completion'></div>
+  </body>
+  <style>
+    body {
+      text-align: center;
+      background: #193549;
+      color: white;
+      font-family: 'helvetica neue', sans-serif;
+      font-weight: 100;
+      font-size: 50px;
+    }
+    input {
+      width:100px;
+    }
+  </style>
+
+  <script>
+  const startTimer = function(seconds, container, oncomplete) {
+    var startTime, timer, obj, ms = seconds*1000,
+        display = document.getElementById(container);
+    obj = {};
+    obj.step = function() {
+      var now = Math.max(0,ms-(new Date().getTime()-startTime)),
+      m = Math.floor(now/60000), s = Math.floor(now/1000)%60;
+      s = (s < 10 ? "0" : "")+s;
+      //
+      display.innerHTML = m+":"+s;
+      if( now == 0) {
+        clearInterval(timer);
+        obj.resume = function() {};
+        if(oncomplete) { oncomplete() };
+      }
+      return now;
+    };
+    obj.resume = function() {
+        startTime = new Date().getTime();
+        timer = setInterval(obj.step, 250); // adjust this number to affect granularity
+        // lower numbers are more accurate, but more CPU-expensive
+    };
+    obj.pause = function() {
+        ms = obj.step();
+        clearInterval(timer);
+    };
+    obj.resume();
+    return obj;
+  }
+
+  function oncomplete() {
+    var div = getElementById('message');
+    div.innerHTML('Done!')
+  }
+
+  // start:
+  var timer = startTimer(25*60, "timer", function() {alert("Done!");});
+  // pause:
+  timer.pause();
+  // resume:
+  timer.resume();
+
+  </script>
+
+</html>
