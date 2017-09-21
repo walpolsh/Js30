@@ -8,8 +8,9 @@ Array.prototype.shuffle = (array) => {
   var i = array.length,
   j = 0,
   temp;
-  while (i--) {
+  while (i--) { //while i is decreasing
     j = Math.floor(Math.random() * (i+1));
+    //The Math.floor() function returns the largest integer less than or equal to a given number.
     temp = array[i];
     array[i] = array[j];
     array[j] = temp;
